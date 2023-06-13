@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+            crossorigin="anonymous">
+    </script>
+
+    <title>Repit</title>
+</head>
+<body>
+<form  action="/ApplicationsRepit" id="asd">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#" class="navbar-left">
+                <img src="/logo.png"  class="pull-left" width=75px/>
+            </a>
+        </div>
+
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/repitProfile">Мой профиль</a></li>
+                <li><a href="#">Заявки</a></li>
+                <li><a href="/logout" method="post">Выйти</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1>Заявки</h1>
+<!--    div class="container_lesson" id="conID">-->
+<tr th:each="item : ${Applications}" >
+<div class="container" th:id="conID + ${item[0]}">
+    <div class="row align-items-center flex-row-reverse">
+        <div class="col-lg-6">
+            <div class="about-text go-to">
+                <h3 class="dark-color"><span th:text="${item[1]}"></span></h3>
+                <h6 class="theme-color lead">Предмет: <span th:text="${item[5]}"></span></h6>
+            </div>
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-success" th:attr="data-id=${item[0]}"> Подтвердить</button>
+        </div>
+    </div>
+    <div class="counter">
+        <div class="row">
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6 class="count h2" data-to="500" data-speed="500"><span th:text="${item[2]}"></span></h6>
+                    <p class="m-0px font-w-600">Телефон</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6 class="count h2" data-to="150" data-speed="150"><span th:text="${item[3]}"></span></h6>
+                    <p class="m-0px font-w-600">Возраст</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <h6 class="count h2" data-to="190" data-speed="190"><span th:text="${item[4]}"></span></h6>
+                    <p class="m-0px font-w-600">Город</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="count-data text-center">
+                    <input type="date" name="dateLesson" th:id="dlesson + ${item[0]}">
+                    <p class="m-0px font-w-600">Дата урока</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    </div>-->
+</form>
+</body>
+
+
+
+<script th:inline="javascript">
+
+    //     function createCont() {
+    //     const container = document.createElement('div');
+    //     container.classList.add('container');
+    //     container.id = 'con1';
+    //
+    //     const innerDiv1 = document.createElement('div');
+    //     innerDiv1.classList.add('row', 'align-items-center', 'flex-row-reverse');
+    //
+    //     const innerDiv2 = document.createElement('div');
+    //     innerDiv2.classList.add('col-lg-6');
+    //
+    //     const aboutText = document.createElement('div');
+    //     aboutText.classList.add('about-text', 'go-to');
+    //
+    //     const nameStudent = document.createElement('h3');
+    //     nameStudent.classList.add('dark-color');
+    //     //nameTutor.innerHTML = '<span id="NameTutor"></span>';
+    //     nameStudent.innerText = '';
+    //     const subject = document.createElement('h6');
+    //     subject.classList.add('theme-color', 'lead');
+    //     //subject.innerHTML = 'Предмет: <span id="Sub"></span>';
+    //     subject.innerText = '';
+    //
+    //     const btn = document.createElement("div");
+    //     btn.className = "pull-right";
+    //     const input = document.createElement("input");
+    //     input.type = "submit";
+    //     input.className = "btn btn-success";
+    //     input.value = "Подтвердить";
+    //     btn.appendChild(input);
+    //
+    //     const counterDiv = document.createElement('div');
+    //     counterDiv.classList.add('counter');
+    //
+    //     const innerDiv3 = document.createElement('div');
+    //     innerDiv3.classList.add('row');
+    //
+    //     const countData1 = document.createElement('div');
+    //     countData1.classList.add('col-6', 'col-lg-3');
+    //
+    //     const mobile = document.createElement('h6');
+    //     mobile.classList.add('count', 'h2');
+    //     mobile.setAttribute('data-to', '500');
+    //     mobile.setAttribute('data-speed', '500');
+    //     mobile.innerText = '';
+    //     //count1.innerHTML = '<span id="DateTime"></span>';
+    //
+    //     const p1 = document.createElement('p');
+    //     p1.classList.add('m-0px', 'font-w-600');
+    //     p1.innerText = 'Телефон';
+    //
+    //     const countData2 = document.createElement('div');
+    //     countData2.classList.add('col-6', 'col-lg-3');
+    //
+    //     const count2 = document.createElement('h6');
+    //     count2.classList.add('count', 'h2');
+    //     count2.setAttribute('data-to', '500');
+    //     count2.setAttribute('data-speed', '500');
+    //     // count2.innerHTML = '<span id="MyMark"></span>';
+    //     count2.innerText = '';
+    //     const p2 = document.createElement('p');
+    //     p2.classList.add('m-0px', 'font-w-600');
+    //     p2.innerText = 'Город';
+    //
+    //     // const countData3 = document.createElement('div');
+    //     // countData3.classList.add('col-6', 'col-lg-3');
+    //     //
+    //     // const count3 = document.createElement('h6');
+    //     // count3.classList.add('count', 'h2');
+    //     // count3.setAttribute('data-to', '500');
+    //     // count3.setAttribute('data-speed', '500');
+    //     // // count3.innerHTML = '<span id="MyComment"></span>';
+    //     // count3.innerText = '';
+    //     // const p3 = document.createElement('p');
+    //     // p3.classList.add('m-0px', 'font-w-600');
+    //     // p3.innerText = 'Дата урока';
+    //
+    //     const divContainer = document.createElement('div');
+    //     divContainer.classList.add('col-6', 'col-lg-3');
+    //
+    //     const countDataDiv = document.createElement('div');
+    //     countDataDiv.classList.add('count-data', 'text-center');
+    //     divContainer.appendChild(countDataDiv);
+    //
+    //     const inputField = document.createElement('input');
+    //     inputField.setAttribute('name', 'guruweba_example_datetime-local');
+    //     inputField.setAttribute('type', 'date');
+    //     countDataDiv.appendChild(inputField);
+    //
+    //     const pTag = document.createElement('p');
+    //     pTag.classList.add('m-0px', 'font-w-600');
+    //     pTag.innerHTML = 'Дата урока';
+    //     countDataDiv.appendChild(pTag);
+    //
+    //     countData1.appendChild(mobile);
+    //     countData1.appendChild(p1);
+    //
+    //     countData2.appendChild(count2);
+    //     countData2.appendChild(p2);
+    //
+    //     divContainer.appendChild(inputField);
+    //     divContainer.appendChild(pTag);
+    //
+    //     innerDiv3.appendChild(countData1);
+    //     innerDiv3.appendChild(countData2);
+    //     innerDiv3.appendChild(divContainer);
+    //
+    //     counterDiv.appendChild(innerDiv3);
+    //
+    //     aboutText.appendChild(nameStudent);
+    //     aboutText.appendChild(subject);
+    //
+    //     innerDiv2.appendChild(aboutText);
+    //
+    //     innerDiv1.appendChild(innerDiv2);
+    //
+    //     container.appendChild(innerDiv1);
+    //     container.appendChild(counterDiv);
+    //
+    //     return container;
+    // }
+
+
+        $(function (){
+            $('.btn').click(function(e) {
+                e.preventDefault();
+                const itemId = $(this).data('id');
+                const dlesson = document.getElementById("dlesson" + itemId.toString());
+                const conID = document.getElementById("conID" + itemId.toString());
+                $.ajax({
+                    url: '/ApplicationsRepit',
+                    type: 'POST',
+                    data: {
+                        'id': itemId,
+                        "dateLesson": dlesson.value
+                    },
+                    success: function(data) {
+                        $(conID).remove();
+                    }
+                });
+            });
+        });
+
+
+</script>
+
+
+</html>
